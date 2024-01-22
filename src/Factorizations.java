@@ -5,13 +5,13 @@ public class Factorizations {
 
     private int n;
     private ArrayList<Integer> primeFactorization;
-    private ArrayList<ArrayList<Integer>> allFactorizationsWithDuplicates;
+    private ArrayList<ArrayList<Integer>> allDistinctFactorizations;
 
     public Factorizations(int inputN) {
         n = inputN;
         primeFactorization = new ArrayList<Integer>();
         primeFactorization = getPrimeFactorization(n); 
-        allFactorizationsWithDuplicates = new ArrayList<ArrayList<Integer>>(); 
+        allDistinctFactorizations = new ArrayList<ArrayList<Integer>>(); 
     }
 
     
@@ -21,19 +21,37 @@ public class Factorizations {
         
     // }
 
-    // /*
-    //  * returns all possible factorizations of n (includes duplicates)
-    //  * returns the member variable allFactorizationsWithDuplicates
-    //  * input is an ArrayList<Integer> that represents the prime factorization of n
-    //  */
-    // public ArrayList<ArrayList<Integer>> getAllFactorizationsWithDuplicates(ArrayList<Integer> factorization) {
-    //     if (factorization.size() == 2) {
-    //         allFactorizationsWithDuplicates.add(factorization); 
-    //     } else {
-    //         ArrayList<Integer> nextLevelFactorization = new 
-    //     }
+    /*
+     * returns all possible distinct factorizations of n (no duplicates)
+     * returns the member variable allDistinctFactorizations
+     * input is an ArrayList<ArrayList<Integer>> that is a list that contains a list that represents the prime factorization of n
+     */
+    public ArrayList<ArrayList<Integer>> getAllFactorizationsWithDuplicates(ArrayList<ArrayList<Integer>> factorizations) {
+        allDistinctFactorizations.add(factorization); 
+        if (factorizations.get(0).size() == 1) {
+            return allDistinctFactorizations;
+        } else {
+            ArrayList<ArrayList<Integer>> combinations = new ArrayList<ArrayList<Integer>>();
+            combinations = getCombinationsNoDuplicates();
+            ArrayList<Integer> nextLevelFactors = new ArrayList<Integer>();
+            for (int i = 0; i < combinations.size(); i++) {
+                nextLevelFactors.add(product(combinations.get(i))); 
+            } // now, 4, 10, and 25 are stored inside nextLevelFactors
+            ArrayList<ArrayList<Integer>> nextLevelFactorizations = new ArrayList<ArrayList<Integer>>(); 
+            for (int i = 0; i < nextLevelFactors.size(); i++) {
+                ArrayList<Integer> nextLevelFactorization1 = new ArrayList<Integer>();
+                nextLevelFactorization1 = getPrimeFactorization(n / nextLevelFactors.get(i));
+                nextLevelFactorization1.add(nextLevelFactors.get(i)); 
+                nextLevelFactorization1 = sort(nextLevelFactorization1);
+                nextLevelFactorizations.add(nextLevelFactorization1);
+            }
+            // now, nextLevelFactorizations contain {4,5,5}, {2,5,10}, and {2,2,25}
+            for (int i = 0; i < nextLevelFactorizations.size(); i++) {
+                return getAllFactorizationsWithDuplicates(nextLevelFactorizations.get(i)); 
+            }
+        }
 
-    // }
+    }
 
     /*
      * helper method
