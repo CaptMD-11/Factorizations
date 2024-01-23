@@ -14,63 +14,105 @@ public class Factorizations {
         allDistinctFactorizations = new ArrayList<ArrayList<Integer>>(); 
     }
 
-    
-
     // // returns number of distinct factorizations of n (prime and composite)
     // public int numFactorizations(int n) {
          
     // }
 
-    /*
-     * returns all possible distinct factorizations of n (no duplicates)
-     * returns the member variable allDistinctFactorizations
-     * input is an ArrayList<ArrayList<Integer>> that is a list that contains a list has first-level factorizations of n
-     * input is an ArrayList<ArrayList<Integer>> that contains {4,5,5}, {2,5,10}, and {2,2,25}
-     */
-    public ArrayList<ArrayList<Integer>> getAllFactorizationsWithDuplicates(ArrayList<ArrayList<Integer>> factorizations) {
-        for (int i = 0; i < factorizations.size(); i++) {
-            allDistinctFactorizations.add(factorizations.get(i)); 
+    // /*
+    //  * returns all possible distinct factorizations of n (no duplicates)
+    //  * returns the member variable allDistinctFactorizations
+    //  * input is an ArrayList<ArrayList<Integer>> that is a list that contains a list has first-level factorizations of n
+    //  * input is an ArrayList<ArrayList<Integer>> that contains {4,5,5}, {2,5,10}, and {2,2,25} for n=100
+    //  */
+    // public ArrayList<ArrayList<Integer>> getAllFactorizationsWithDuplicates(ArrayList<ArrayList<Integer>> factorizations) {
+    //     for (int i = 0; i < factorizations.size(); i++) {
+    //         allDistinctFactorizations.add(factorizations.get(i)); 
+    //     }
+    //     if (factorizations.get(0).size() == 2) {
+    //         allDistinctFactorizations.add(primeFactorization);
+    //         return allDistinctFactorizations;
+    //     } else {
+    //         int factorizationsOriginalSize = factorizations.size(); 
+    //         ArrayList<ArrayList<ArrayList<Integer>>> allCombinationsOfFactorizationsAtLevel = new ArrayList<ArrayList<ArrayList<Integer>>>();
+    //         for (int i = 0; i < factorizations.size(); i++) {
+    //             ArrayList<ArrayList<Integer>> combinations1 = new ArrayList<ArrayList<Integer>>();
+    //             combinations1 = getCombinationsNoDuplicates(factorizations.get(i));
+    //             ArrayList<Integer> nextLevelFactors1 = new ArrayList<Integer>();
+    //             for (int j = 0; j < combinations1.size(); j++) {
+    //                 nextLevelFactors1.add(product(combinations1.get(j))); 
+    //             } // now, second-level factors1 are stored inside nextLevelFactors1
+    //             ArrayList<ArrayList<Integer>> nextLevelFactorizations1 = new ArrayList<ArrayList<Integer>>(); 
+    //             for (int k = 0; k < nextLevelFactors1.size(); k++) {
+    //                 ArrayList<Integer> nextLevelFactorization1 = new ArrayList<Integer>();
+    //                 nextLevelFactorization1 = getPrimeFactorization(n / nextLevelFactors1.get(i));
+    //                 nextLevelFactorization1.add(nextLevelFactors1.get(i)); 
+    //                 nextLevelFactorization1 = sort(nextLevelFactorization1);
+    //                 nextLevelFactorizations.add(nextLevelFactorization1);
+    //             }
+    //         }
+    //         // first, add next level factorizations to factorizations          
+    //         for (int i = 0; i < nextLevel)  
+    //         // now, nextLevelFactorizations contain {4,5,5}, {2,5,10}, and {2,2,25}
+    //         for (int i = 0; i < nextLevelFactorizations.size(); i++) {
+    //             allDistinctFactorizations.add(nextLevelFactorizations.get(i)); 
+    //         }
+    //         // now, {4,5,5}, {2,5,10}, and {2,2,25} are all added to allDistinctFactorizations
+    //         for (int i = 0; i < nextLevelFactorizations.size(); i++) {
+    //             return getAllFactorizationsWithDuplicates(nextLevelFactorizations.get(i)); 
+    //         }
+    //     }
+
+    // }
+
+    public ArrayList<ArrayList<Integer>> testGetAllFactorizationsWithDuplicates(ArrayList<ArrayList<Integer>> firstLevelFactorizations) {
+        for (int i = 0; i < firstLevelFactorizations.size(); i++) {
+            allDistinctFactorizations.add(firstLevelFactorizations.get(i)); 
         }
-        if (factorizations.get(0).size() == 2) {
-            allDistinctFactorizations.add(primeFactorization);
+        if (firstLevelFactorizations.get(0).size() == 2) {
+            allDistinctFactorizations.add(getPrimeFactorization(n));
             return allDistinctFactorizations;
         } else {
-            int factorizationsOriginalSize = factorizations.size(); 
-            ArrayList<ArrayList<ArrayList<Integer>>> allCombinationsOfFactorizationsAtLevel = new ArrayList<ArrayList<ArrayList<Integer>>>();
-            for (int i = 0; i < factorizations.size(); i++) {
-                ArrayList<ArrayList<Integer>> combinations1 = new ArrayList<ArrayList<Integer>>();
-                combinations1 = getCombinationsNoDuplicates(factorizations.get(i));
-                ArrayList<Integer> nextLevelFactors1 = new ArrayList<Integer>();
-                for (int j = 0; j < combinations1.size(); j++) {
-                    nextLevelFactors1.add(product(combinations1.get(j))); 
-                } // now, second-level factors1 are stored inside nextLevelFactors1
-                ArrayList<ArrayList<Integer>> nextLevelFactorizations1 = new ArrayList<ArrayList<Integer>>(); 
-                for (int k = 0; k < nextLevelFactors1.size(); k++) {
-                    ArrayList<Integer> nextLevelFactorization1 = new ArrayList<Integer>();
-                    nextLevelFactorization1 = getPrimeFactorization(n / nextLevelFactors1.get(i));
-                    nextLevelFactorization1.add(nextLevelFactors1.get(i)); 
-                    nextLevelFactorization1 = sort(nextLevelFactorization1);
-                    nextLevelFactorizations.add(nextLevelFactorization1);
+            ArrayList<ArrayList<ArrayList<Integer>>> kLevelCombinations = new ArrayList<ArrayList<ArrayList<Integer>>>(); 
+            for (int i = 0; i < firstLevelFactorizations.size(); i++) {
+                kLevelCombinations.add(getCombinationsNoDuplicates(firstLevelFactorizations.get(i))); 
+            }
+            // need to remove duplicates inside kLevelCombinations
+            for (int i = 0; i < kLevelCombinations.size(); i++) {
+                ArrayList<ArrayList<Integer>> combinationsIthIndexNoDuplicates = new ArrayList<ArrayList<Integer>>(); 
+                combinationsIthIndexNoDuplicates.add(kLevelCombinations.get(i).get(0)); 
+                for (int j = 1; j < kLevelCombinations.get(i).size(); j++) {
+                    if (firstListExistsInSecondList(kLevelCombinations.get(i).get(j), combinationsIthIndexNoDuplicates) == false)
+                        combinationsIthIndexNoDuplicates.add(kLevelCombinations.get(i).get(j)); 
                 }
+                kLevelCombinations.set(i, combinationsIthIndexNoDuplicates); 
+            } // now, duplicate combinations should be removed and only distinct combinations should exist inside kLevelCombinations
+            for (int i = 0; i < kLevelCombinations.size(); i++) {
+                ArrayList<Integer> jIndexProducts = new ArrayList<Integer>(); 
+                for (int j = 0; j < kLevelCombinations.get(i).size(); j++) {
+                    jIndexProducts.add(product(kLevelCombinations.get(i).get(j))); 
+                }
+                for (int j = 0; j < kLevelCombinations.get(i).size(); j++) {
+                    kLevelCombinations.get(i).get(j).clear();
+                    kLevelCombinations.get(i).get(j).add(jIndexProducts.get(j)); 
+                }
+            } // now, products are inside kLevelCombinations, where each product is inside its own ArrayList
+            ArrayList<ArrayList<Integer>> kLevelFactorizationCombinationProduct = new ArrayList<ArrayList<Integer>>(); 
+            for (int i = 0; i < kLevelCombinations.size(); i++) {
+                ArrayList<Integer> list = new ArrayList<Integer>(); 
+                for (int j = 0; j < kLevelCombinations.get(i).size(); j++) {
+                    list.add(kLevelCombinations.get(i).get(j).get(0)); 
+                }
+                kLevelFactorizationCombinationProduct.add(list); 
             }
-            // first, add next level factorizations to factorizations          
-            for (int i = 0; i < nextLevel)  
-            // now, nextLevelFactorizations contain {4,5,5}, {2,5,10}, and {2,2,25}
-            for (int i = 0; i < nextLevelFactorizations.size(); i++) {
-                allDistinctFactorizations.add(nextLevelFactorizations.get(i)); 
-            }
-            // now, {4,5,5}, {2,5,10}, and {2,2,25} are all added to allDistinctFactorizations
-            for (int i = 0; i < nextLevelFactorizations.size(); i++) {
-                return getAllFactorizationsWithDuplicates(nextLevelFactorizations.get(i)); 
-            }
+            // now, completed with first paragraph on 8th page of handwritten paper 
         }
-
     }
 
     /*
      * helper method
      * STEP 1 OF ALGORITHM
-     * returns all combinations (grouped into pairs of 2) of a factorization with no duplicates 
+     * returns all combinations (nCr; grouped into pairs of 2) of a factorization with no duplicates 
      */
     public ArrayList<ArrayList<Integer>> getCombinationsNoDuplicates(ArrayList<Integer> factorization) {
         ArrayList<ArrayList<Integer>> res1 = new ArrayList<ArrayList<Integer>>(); 
