@@ -25,10 +25,8 @@ public class Factorizations {
     /*
      * returns all possible distinct factorizations of n (no duplicates)
      * returns the member variable allDistinctFactorizations
-     * input is an ArrayList<ArrayList<Integer>> that is a list that contains a list has first-level factorizations of n
-     * input is an ArrayList<ArrayList<Integer>> that contains {4,5,5}, {2,5,10}, and {2,2,25} for n=100
      */
-    public ArrayList<ArrayList<Integer>> testGetAllFactorizationsWithDuplicates(ArrayList<ArrayList<Integer>> firstLevelFactorizations) {
+    public ArrayList<ArrayList<Integer>> testGetAllFactorizationsWithDuplicates() {
         for (int i = 0; i < firstLevelFactorizations.size(); i++) {
             allDistinctFactorizations.add(firstLevelFactorizations.get(i)); 
         }
