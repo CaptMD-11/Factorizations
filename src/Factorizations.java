@@ -17,16 +17,30 @@ public class Factorizations {
         
     }
 
-    // // returns number of distinct factorizations of n (prime and composite)
-    // public int numFactorizations(int n) {
-         
-    // }
+    // returns number of distinct factorizations of n (prime and composite)
+    public int numFactorizations(int n) {
+        ArrayList<ArrayList<Integer>> distinctFactorizations = new ArrayList<ArrayList<Integer>>(0); 
+        distinctFactorizations = getAllDistinctFactorizations();
+        return distinctFactorizations.size();
+    }
+
+    public ArrayList<ArrayList<Integer>> getAllDistinctFactorizations() {
+        ArrayList<ArrayList<Integer>> duplicateFactorizations = new ArrayList<ArrayList<Integer>>(); 
+        duplicateFactorizations = getAllFactorizationsWithDuplicates();
+        ArrayList<ArrayList<Integer>> distinctFactorizations = new ArrayList<ArrayList<Integer>>(); 
+        distinctFactorizations.add(duplicateFactorizations.get(0)); 
+        for (int i = 1; i < duplicateFactorizations.size(); i++) {
+            if (firstListExistsInSecondList(duplicateFactorizations.get(i), distinctFactorizations) == false)
+                distinctFactorizations.add(duplicateFactorizations.get(i)); 
+        }
+        return distinctFactorizations;
+    }
 
     /*
      * returns all possible distinct factorizations of n (no duplicates)
      * returns the member variable allDistinctFactorizations
      */
-    public ArrayList<ArrayList<Integer>> testGetAllFactorizationsWithDuplicates() {
+    public ArrayList<ArrayList<Integer>> getAllFactorizationsWithDuplicates() {
         for (int i = 0; i < firstLevelFactorizations.size(); i++) {
             allDistinctFactorizations.add(firstLevelFactorizations.get(i)); 
         }
