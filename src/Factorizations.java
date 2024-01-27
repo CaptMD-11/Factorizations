@@ -35,16 +35,17 @@ public class Factorizations {
             firstLevelFactorizations.get(i).add(prime_products.get(i)); 
             System.out.println(firstLevelFactorizations.get(i)); 
         }
-
-        // for (int i = 0; i < firstLevelFactorizations.size(); i++) {
-        //     firstLevelFactorizations.get(i).add()
-        // }
-        // // now, each element in firstLevelFactorizations is an ArrayList<Integer> that represents pf(n)
-        // for (int i = 0; i < prime_products.size(); i++) {
-        //     for (int j = 0; j < firstLevelFactorizations.size(); j++) {
-        //         for ()
-        //     }
-        // }
+        // now, added each product to each respective element of firstLevelFactorizations
+        for (int i = 0; i < firstLevelFactorizations.size(); i++) {
+            for (int j = firstLevelFactorizations.get(i).size()-1; j > -1; j--) {
+                for (int k = 0; k < prime_combinationsNoDuplicates.size(); k++) {
+                    for (int l = 0; l < prime_combinationsNoDuplicates.get(k).size(); l++) {
+                        
+                    }
+                }
+            }
+        }
+        
     }
 
     // // returns number of distinct factorizations of n (prime and composite)
