@@ -20,8 +20,31 @@ public class Factorizations {
         for (int i = 0; i < prime_combinationsNoDuplicates.size(); i++) {
             prime_products.add(product(prime_combinationsNoDuplicates.get(i))); 
         }
-        // now, prime_products represents an ArrayList<Integer> containing the products of the individual combinations of pf(n)
+        // now, prime_products represents an ArrayList<Integer> containing the products of the individual distinct combinations of pf(n)
+        for (int i = 0; i < prime_products.size(); i++) {
+            ArrayList<Integer> list = new ArrayList<Integer>(); 
+            for (int j = 0; j < primeFactorization.size(); j++) {
+                list.add(primeFactorization.get(j)); 
+            }
+            firstLevelFactorizations.add(list); 
+        }
+        // now, prime_products and firstLevelFactorizations both contain the same number of elements (although they contain different data types)
+        for (int i = 0; i < firstLevelFactorizations.size(); i++) {
+            // System.out.println(firstLevelFactorizations.get(i)); 
+            // System.out.println(prime_products.get(i)); 
+            firstLevelFactorizations.get(i).add(prime_products.get(i)); 
+            System.out.println(firstLevelFactorizations.get(i)); 
+        }
 
+        // for (int i = 0; i < firstLevelFactorizations.size(); i++) {
+        //     firstLevelFactorizations.get(i).add()
+        // }
+        // // now, each element in firstLevelFactorizations is an ArrayList<Integer> that represents pf(n)
+        // for (int i = 0; i < prime_products.size(); i++) {
+        //     for (int j = 0; j < firstLevelFactorizations.size(); j++) {
+        //         for ()
+        //     }
+        // }
     }
 
     // // returns number of distinct factorizations of n (prime and composite)
