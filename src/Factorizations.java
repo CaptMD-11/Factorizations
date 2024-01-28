@@ -67,9 +67,45 @@ public class Factorizations {
             m_allDistinctFactorizations.add(m_primeFactorization);
             return m_allDistinctFactorizations;
         } else {
+            ArrayList<ArrayList<Integer>> nextLevelFactorizations = new ArrayList<ArrayList<Integer>>();
+            for (int a = 0; a < factorizations.size(); a++) {
+                ArrayList<ArrayList<Integer>> factor_combinationsNoDuplicates = new ArrayList<ArrayList<Integer>>();
+                factor_combinationsNoDuplicates = getCombinationsNoDuplicates(factorizations.get(a));
+                ArrayList<Integer> factor_products = new ArrayList<Integer>();
+                for (int i = 0; i < factor_combinationsNoDuplicates.size(); i++) {
+                    factor_products.add(product(factor_combinationsNoDuplicates.get(i)));
+                }
+                // now, prime_products represents an ArrayList<Integer> containing the products
+                // of the individual distinct combinations of pf(n)
+                for (int i = 0; i < factor_products.size(); i++) {
+                    ArrayList<Integer> list = new ArrayList<Integer>();
+                    for (int j = 0; j < factorizations.get(a).size(); j++) {
+                        list.add(factorizations.get(a).get(j));
+                    }
+                    nextLevelFactorizations.add(list);
+                }
+                // now, prime_products and nextLevelFactorizations both contain the same number
+                // of elements (although they contain different data types)
+                for (int i = 0; i < nextLevelFactorizations.size(); i++) {
+                    nextLevelFactorizations.get(i).add(factor_products.get(i));
+                }
+                // now, added each product to each respective element of
+                // m_firstLevelFactorizations
+                // m_firstLevelFactorizations and prime_combinationsNoDuplicates have the same
+                // size
+                for (int i = 0; i < nextLevelFactorizations.size(); i++) {
+                    ArrayList<Integer> compliment = new ArrayList<Integer>();
+                    compliment = getSubsetCompliment(factor_combinationsNoDuplicates.get(i), factorizations.get(a));
+                    for (int j = 0; j < compliment.size(); j++) {
+                        nextLevelFactorizations.get(i).add(compliment.get(j));
+                    }
+                    for (int j = factorizations.get(a).size() - 1; j > -1; j--) {
+                        nextLevelFactorizations.get(i).remove(j);
 
-            // junk line below
-            return factorizations;
+                    }
+                }
+            }
+            return getAllFactorizationsWithDuplicates(nextLevelFactorizations);
         }
     }
 
