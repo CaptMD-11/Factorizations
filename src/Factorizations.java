@@ -87,7 +87,7 @@ public class Factorizations {
         for (int i = 0; i < factorizations.size(); i++) {
             m_allDistinctFactorizations.add(factorizations.get(i));
         }
-        if (factorizations.get(0).size() == 2) {
+        if (factorizations.get(0).size() <= 2) {
             m_allDistinctFactorizations.add(m_primeFactorization);
             return m_allDistinctFactorizations;
         } else {
@@ -286,7 +286,7 @@ public class Factorizations {
      * helper method
      * returns true if n is prime and false otherwise
      */
-    public boolean isPrime(int n) {
+    public static boolean isPrime(int n) {
         for (int i = 2; i <= n / 2; i++) {
             if (n % i == 0)
                 return false;
