@@ -30,21 +30,22 @@ public class Factorizations {
         }
         // now, prime_products and firstLevelFactorizations both contain the same number of elements (although they contain different data types)
         for (int i = 0; i < firstLevelFactorizations.size(); i++) {
-            // System.out.println(firstLevelFactorizations.get(i)); 
-            // System.out.println(prime_products.get(i)); 
             firstLevelFactorizations.get(i).add(prime_products.get(i)); 
-            System.out.println(firstLevelFactorizations.get(i)); 
         }
         // now, added each product to each respective element of firstLevelFactorizations
         for (int i = 0; i < firstLevelFactorizations.size(); i++) {
-            for (int j = firstLevelFactorizations.get(i).size()-1; j > -1; j--) {
-                for (int k = 0; k < prime_combinationsNoDuplicates.size(); k++) {
-                    for (int l = 0; l < prime_combinationsNoDuplicates.get(k).size(); l++) {
-                        
-                    }
+            for (int j = 0; j < prime_combinationsNoDuplicates.get(i).size(); j++) {
+                for (int k = firstLevelFactorizations.get(i).size()-1; k > -1; k--) {
+                    if (prime_combinationsNoDuplicates.get(i).get(j) != firstLevelFactorizations.get(i).get(k))
+                        firstLevelFactorizations.get(i).remove(k); 
+                        break;
                 }
             }
         }
+        for (int i = 0; i < firstLevelFactorizations.size(); i++) {
+            System.out.println(firstLevelFactorizations.get(i)); 
+        }
+        System.out.println("asdf"); 
         
     }
 
