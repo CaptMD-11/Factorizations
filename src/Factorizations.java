@@ -33,20 +33,17 @@ public class Factorizations {
             firstLevelFactorizations.get(i).add(prime_products.get(i)); 
         }
         // now, added each product to each respective element of firstLevelFactorizations
+        // firstLevelFactorizations and prime_combinationsNoDuplicates have the same size 
         for (int i = 0; i < firstLevelFactorizations.size(); i++) {
-            for (int j = 0; j < prime_combinationsNoDuplicates.get(i).size(); j++) {
-                for (int k = firstLevelFactorizations.get(i).size()-1; k > -1; k--) {
-                    if (prime_combinationsNoDuplicates.get(i).get(j) != firstLevelFactorizations.get(i).get(k))
-                        firstLevelFactorizations.get(i).remove(k); 
-                        break;
-                }
+            ArrayList<Integer> compliment = new ArrayList<Integer>(); 
+            compliment = getSubsetCompliment(prime_combinationsNoDuplicates.get(i), primeFactorization);
+            for (int j = 0; j < compliment.size(); j++) {
+                firstLevelFactorizations.get(i).add(compliment.get(j)); 
+            }
+            for (int j = primeFactorization.size()-1; j > -1; j--) {
+                firstLevelFactorizations.get(i).remove(j);
             }
         }
-        for (int i = 0; i < firstLevelFactorizations.size(); i++) {
-            System.out.println(firstLevelFactorizations.get(i)); 
-        }
-        System.out.println("asdf"); 
-        
     }
 
     // // returns number of distinct factorizations of n (prime and composite)
@@ -115,6 +112,26 @@ public class Factorizations {
     //         // now, completed with first paragraph on 8th page of handwritten paper 
     //     }
     // }
+
+    /*
+     * helper method
+     * returns the compliment of the subset of the set
+     */
+    public ArrayList<Integer> getSubsetCompliment(ArrayList<Integer> smallList, ArrayList<Integer> bigList) {
+        ArrayList<Integer> bigListCopy = new ArrayList<Integer>();
+        for (int i = 0; i < bigList.size(); i++) {
+            bigListCopy.add(bigList.get(i));
+        }
+        for (int i = 0; i < smallList.size(); i++) {
+            for (int j = bigListCopy.size()-1; j > -1; j--) {
+                if (smallList.get(i) == bigListCopy.get(j)) {
+                    bigListCopy.remove(j);
+                    break;
+                }
+            }
+        }
+        return bigListCopy;
+    }
 
     /*
      * helper method
