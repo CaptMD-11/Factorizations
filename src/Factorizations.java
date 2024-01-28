@@ -142,30 +142,6 @@ public class Factorizations {
         }
     }
 
-    // for (int i = 0; i < kLevelCombinations.size(); i++) {
-    // ArrayList<Integer> jIndexProducts = new ArrayList<Integer>();
-    // for (int j = 0; j < kLevelCombinations.get(i).size(); j++) {
-    // jIndexProducts.add(product(kLevelCombinations.get(i).get(j)));
-    // }
-    // for (int j = 0; j < kLevelCombinations.get(i).size(); j++) {
-    // kLevelCombinations.get(i).get(j).clear();
-    // kLevelCombinations.get(i).get(j).add(jIndexProducts.get(j));
-    // }
-    // } // now, products are inside kLevelCombinations, where each product is
-    // inside its own ArrayList
-    // ArrayList<ArrayList<Integer>> kLevelFactorizationCombinationProduct = new
-    // ArrayList<ArrayList<Integer>>();
-    // for (int i = 0; i < kLevelCombinations.size(); i++) {
-    // ArrayList<Integer> list = new ArrayList<Integer>();
-    // for (int j = 0; j < kLevelCombinations.get(i).size(); j++) {
-    // list.add(kLevelCombinations.get(i).get(j).get(0));
-    // }
-    // kLevelFactorizationCombinationProduct.add(list);
-    // }
-    // // now, completed with first paragraph on 8th page of handwritten paper
-    // }
-    // }
-
     /*
      * helper method
      * returns the firstLevelFactorization of pf(n)
