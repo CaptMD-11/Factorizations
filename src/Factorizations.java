@@ -51,10 +51,16 @@ public class Factorizations {
         }
     }
 
+    public int getNumberOfDistinctFactorizations() {
+        ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+        list = getDistinctFactorizations();
+        return list.size();
+    }
+
     /*
      * returns all distinct factorizations of n
      */
-    public ArrayList<ArrayList<Integer>> getAllDistinctFactorizations() {
+    public ArrayList<ArrayList<Integer>> getDistinctFactorizations() {
         ArrayList<ArrayList<Integer>> factorizationWithDuplicates = new ArrayList<ArrayList<Integer>>();
         factorizationWithDuplicates = getAllFactorizationsWithDuplicates(m_firstLevelFactorizations);
         for (int i = 0; i < factorizationWithDuplicates.size(); i++) {
