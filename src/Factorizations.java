@@ -67,42 +67,7 @@ public class Factorizations {
             m_allDistinctFactorizations.add(m_primeFactorization);
             return m_allDistinctFactorizations;
         } else {
-            ArrayList<ArrayList<ArrayList<Integer>>> kLevelCombinations = new ArrayList<ArrayList<ArrayList<Integer>>>();
-            for (int i = 0; i < factorizations.size(); i++) {
-                kLevelCombinations.add(getCombinationsNoDuplicates(factorizations.get(i)));
-            }
-            // need to remove duplicates in kLevelCombinations
-            for (int i = 0; i < kLevelCombinations.size(); i++) {
-                ArrayList<ArrayList<Integer>> combinationsIthIndexNoDuplicates = new ArrayList<ArrayList<Integer>>();
-                combinationsIthIndexNoDuplicates.add(kLevelCombinations.get(i).get(0));
-                for (int j = 1; j < kLevelCombinations.get(i).size(); j++) {
-                    if (firstListExistsInSecondList(kLevelCombinations.get(i).get(j),
-                            combinationsIthIndexNoDuplicates) == false)
-                        combinationsIthIndexNoDuplicates.add(kLevelCombinations.get(i).get(j));
-                }
-                kLevelCombinations.set(i, combinationsIthIndexNoDuplicates);
-            } // now, duplicate combinations should be removed and only distinct combinations
-              // need to traverse kLevelCombinations and multiply each pair of factors
-            for (int i = 0; i < kLevelCombinations.size(); i++) {
-                for (int j = 0; j < kLevelCombinations.get(i).size(); j++) {
-                    int jLevelProduct = product(kLevelCombinations.get(i).get(j));
-                    kLevelCombinations.get(i).get(j).clear();
-                    kLevelCombinations.get(i).get(j).add(jLevelProduct);
-                }
-            }
-            // now, consolidate products into less complicated individual sets
-            ArrayList<ArrayList<Integer>> kLevelFactorizationCombinationProduct = new ArrayList<ArrayList<Integer>>();
-            for (int i = 0; i < kLevelCombinations.size(); i++) {
-                ArrayList<Integer> list = new ArrayList<Integer>();
-                for (int j = 0; j < kLevelCombinations.get(i).size(); j++) {
-                    list.add(kLevelCombinations.get(i).get(j).get(0));
-                }
-                kLevelFactorizationCombinationProduct.add(list);
-            }
-            // now, done with first paragraph on 8th page of handwritten paper
-            for (int i = 0; i < factorizations.size(); i++) {
 
-            }
             // junk line below
             return factorizations;
         }
