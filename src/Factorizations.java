@@ -52,8 +52,26 @@ public class Factorizations {
     }
 
     /*
-     * returns all possible distinct factorizations of n (no duplicates)
-     * returns the member variable allDistinctFactorizations
+     * returns all distinct factorizations of n
+     */
+    public ArrayList<ArrayList<Integer>> getAllDistinctFactorizations() {
+        ArrayList<ArrayList<Integer>> factorizationWithDuplicates = new ArrayList<ArrayList<Integer>>();
+        factorizationWithDuplicates = getAllFactorizationsWithDuplicates(m_firstLevelFactorizations);
+        for (int i = 0; i < factorizationWithDuplicates.size(); i++) {
+            factorizationWithDuplicates.set(i, sort(factorizationWithDuplicates.get(i)));
+        }
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        res.add(factorizationWithDuplicates.get(0));
+        for (int i = 1; i < factorizationWithDuplicates.size(); i++) {
+            if (firstListExistsInSecondList(factorizationWithDuplicates.get(i), res) == false)
+                res.add(factorizationWithDuplicates.get(i));
+        }
+        m_allDistinctFactorizations = res;
+        return res;
+    }
+
+    /*
+     * returns all possible factorizations of n (yes duplicates)
      * original input is m_firstLevelFactorizations
      * subsequent inputs are kth level factorizations
      */
@@ -77,32 +95,41 @@ public class Factorizations {
                 }
                 // now, prime_products represents an ArrayList<Integer> containing the products
                 // of the individual distinct combinations of pf(n)
+
+                ArrayList<ArrayList<Integer>> nextLevelFactorizationChildNodes = new ArrayList<ArrayList<Integer>>();
+
                 for (int i = 0; i < factor_products.size(); i++) {
                     ArrayList<Integer> list = new ArrayList<Integer>();
                     for (int j = 0; j < factorizations.get(a).size(); j++) {
                         list.add(factorizations.get(a).get(j));
                     }
-                    nextLevelFactorizations.add(list);
+                    nextLevelFactorizationChildNodes.add(list);
                 }
-                // now, prime_products and nextLevelFactorizations both contain the same number
+                // now, prime_products and nextLevelFactorizationChildNodes both contain the
+                // same number
                 // of elements (although they contain different data types)
-                for (int i = 0; i < nextLevelFactorizations.size(); i++) {
-                    nextLevelFactorizations.get(i).add(factor_products.get(i));
+                for (int i = 0; i < nextLevelFactorizationChildNodes.size(); i++) {
+                    nextLevelFactorizationChildNodes.get(i).add(factor_products.get(i));
                 }
                 // now, added each product to each respective element of
                 // m_firstLevelFactorizations
                 // m_firstLevelFactorizations and prime_combinationsNoDuplicates have the same
                 // size
-                for (int i = 0; i < nextLevelFactorizations.size(); i++) {
+                for (int i = 0; i < nextLevelFactorizationChildNodes.size(); i++) {
                     ArrayList<Integer> compliment = new ArrayList<Integer>();
                     compliment = getSubsetCompliment(factor_combinationsNoDuplicates.get(i), factorizations.get(a));
                     for (int j = 0; j < compliment.size(); j++) {
-                        nextLevelFactorizations.get(i).add(compliment.get(j));
+                        nextLevelFactorizationChildNodes.get(i).add(compliment.get(j));
                     }
                     for (int j = factorizations.get(a).size() - 1; j > -1; j--) {
-                        nextLevelFactorizations.get(i).remove(j);
+                        nextLevelFactorizationChildNodes.get(i).remove(j);
 
                     }
+                }
+                // the loop starting on the next line adds all the child nodes to the
+                // nextLevelFactorizations
+                for (int i = 0; i < nextLevelFactorizationChildNodes.size(); i++) {
+                    nextLevelFactorizations.add(nextLevelFactorizationChildNodes.get(i));
                 }
             }
             return getAllFactorizationsWithDuplicates(nextLevelFactorizations);
