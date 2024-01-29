@@ -8,6 +8,10 @@ public class Factorizations {
     private ArrayList<ArrayList<Integer>> m_allDistinctFactorizations;
     private ArrayList<ArrayList<Integer>> m_firstLevelFactorizations;
 
+    /*
+     * input only composite integers
+     * exception is thrown if a prime is inputted
+     */
     public Factorizations(int inputN) {
         m_n = inputN;
         m_primeFactorization = new ArrayList<Integer>();
