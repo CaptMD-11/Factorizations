@@ -5,7 +5,7 @@ public class r_GetFactorizationFrequenciesForIntegers {
     public static void main(String[] args) {
 
         // input upper bound in below line
-        int upperBound = 100;
+        int upperBound = 10;
         ArrayList<ArrayList<Integer>> factorizationFrequenciesPerNumber = new ArrayList<ArrayList<Integer>>();
         factorizationFrequenciesPerNumber = getFactorizationFrequenciesPerNumber(upperBound);
 
