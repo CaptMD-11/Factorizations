@@ -8,8 +8,8 @@ public class r_GetFactorizationFrequenciesForIntegers {
     public static void main(String[] args) {
 
         // input lower bound and upper bound in below lines
-        int lowerBound = 8500;
-        int upperBound = 10000;
+        int lowerBound = 100;
+        int upperBound = 200;
         ArrayList<ArrayList<Integer>> factorizationFrequenciesPerNumber = new ArrayList<ArrayList<Integer>>();
         factorizationFrequenciesPerNumber = getFactorizationFrequenciesPerNumber(lowerBound, upperBound);
 
@@ -21,9 +21,9 @@ public class r_GetFactorizationFrequenciesForIntegers {
             for (int i = 0; i < factorizationFrequenciesPerNumber.size(); i++) {
                 factorizationFrequenciesPerNumberStrList.add(factorizationFrequenciesPerNumber.get(i) + "");
             }
-            File myObj = new File("frequenciesPerInteger.txt");
+            File myObj = new File("distinctFactorizationFrequenciesPerInteger.txt");
             myObj.createNewFile();
-            FileWriter fileWriter = new FileWriter("frequenciesPerInteger.txt");
+            FileWriter fileWriter = new FileWriter("distinctFactorizationFrequenciesPerInteger.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i = 0; i < factorizationFrequenciesPerNumberStrList.size(); i++) {
                 String entry = factorizationFrequenciesPerNumberStrList.get(i);
