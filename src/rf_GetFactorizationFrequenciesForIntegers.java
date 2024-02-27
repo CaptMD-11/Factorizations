@@ -5,45 +5,68 @@ import java.io.BufferedWriter;
 
 public class rf_GetFactorizationFrequenciesForIntegers {
 
+    // CREATES NEW FILE
     public static void main(String[] args) {
 
         // input lower bound and upper bound in below lines
-        int lowerBound = 100;
-        int upperBound = 200;
+        int lowerBound = 6001;
+        int upperBound = 7500;
         ArrayList<ArrayList<Integer>> factorizationFrequenciesPerNumber = new ArrayList<ArrayList<Integer>>();
         factorizationFrequenciesPerNumber = getFactorizationFrequenciesPerNumber(lowerBound, upperBound);
 
-        // prints out ArrayLists, where each ArrayList = [c,f]
-        // c is the composite integer of interest
-        // f is the number of distinct factorizations of c
+        // mac grapher input
         try {
-            ArrayList<String> factorizationFrequenciesPerNumberStrList = new ArrayList<String>();
-            for (int i = 0; i < factorizationFrequenciesPerNumber.size(); i++) {
-                factorizationFrequenciesPerNumberStrList.add(factorizationFrequenciesPerNumber.get(i) + "");
-            }
-            File myObj = new File("distinctFactorizationFrequenciesPerInteger.txt");
+            String fileName = "dstnctFctrzns" + lowerBound + "to" + upperBound + ".txt";
+            File myObj = new File(fileName);
             myObj.createNewFile();
-            FileWriter fileWriter = new FileWriter("distinctFactorizationFrequenciesPerInteger.txt");
+            FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (int i = 0; i < factorizationFrequenciesPerNumberStrList.size(); i++) {
-                String entry = factorizationFrequenciesPerNumberStrList.get(i);
-                String str = "";
-                str += "(";
-                for (int j = 1; j < entry.length() - 1; j++) {
-                    str += entry.substring(j, j + 1);
-                }
-                str += ")";
-                bufferedWriter.write(str);
+            for (int i = 0; i < factorizationFrequenciesPerNumber.size(); i++) {
+                String entry = factorizationFrequenciesPerNumber.get(i).get(0) + " "
+                        + factorizationFrequenciesPerNumber.get(i).get(1) + " " + 0;
+                bufferedWriter.write(entry);
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
+            System.out.println("Wrote file from " + lowerBound + " to " + upperBound);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < factorizationFrequenciesPerNumber.size(); i++) {
-            System.out.println(factorizationFrequenciesPerNumber.get(i));
-        }
+        // // prints out ArrayLists, where each ArrayList = [c,f]
+        // // c is the composite integer of interest
+        // // f is the number of distinct factorizations of c
+        // try {
+        // ArrayList<String> factorizationFrequenciesPerNumberStrList = new
+        // ArrayList<String>();
+        // for (int i = 0; i < factorizationFrequenciesPerNumber.size(); i++) {
+        // factorizationFrequenciesPerNumberStrList.add(factorizationFrequenciesPerNumber.get(i)
+        // + "");
+        // }
+        // File myObj = new File("distinctFactorizationFrequenciesPerInteger.txt");
+        // myObj.createNewFile();
+        // FileWriter fileWriter = new
+        // FileWriter("distinctFactorizationFrequenciesPerInteger.txt");
+        // BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        // for (int i = 0; i < factorizationFrequenciesPerNumberStrList.size(); i++) {
+        // String entry = factorizationFrequenciesPerNumberStrList.get(i);
+        // String str = "";
+        // str += "(";
+        // for (int j = 1; j < entry.length() - 1; j++) {
+        // str += entry.substring(j, j + 1);
+        // }
+        // str += ")";
+        // bufferedWriter.write(str);
+        // bufferedWriter.newLine();
+        // }
+        // bufferedWriter.close();
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // }
+
+        // for (int i = 0; i < factorizationFrequenciesPerNumber.size(); i++) {
+        // System.out.println(factorizationFrequenciesPerNumber.get(i));
+        // }
 
     }
 
