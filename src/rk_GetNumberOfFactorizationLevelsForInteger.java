@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
-public class r_GetNumberOfFactorizationLevelsForInteger {
+public class rk_GetNumberOfFactorizationLevelsForInteger {
 
     public static void main(String[] args) {
 

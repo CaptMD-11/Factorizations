@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class r_GetDistinctFactorizationsForInteger {
+public class rf_GetDistinctFactorizationsForInteger {
 
     public static void main(String[] args) {
 

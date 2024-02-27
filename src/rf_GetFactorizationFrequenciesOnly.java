@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class r_GetFactorizationFrequenciesOnly {
+public class rf_GetFactorizationFrequenciesOnly {
 
     public static void main(String[] args) {
 
