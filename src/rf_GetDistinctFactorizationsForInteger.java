@@ -5,7 +5,7 @@ public class rf_GetDistinctFactorizationsForInteger {
     public static void main(String[] args) {
 
         // input composite integer in the below line
-        int inputN = 210;
+        int inputN = 100;
         Factorizations obj = new Factorizations(inputN);
         ArrayList<ArrayList<Integer>> distinctFactorizations = new ArrayList<ArrayList<Integer>>();
         distinctFactorizations = obj.getDistinctFactorizations();
